@@ -9,6 +9,8 @@ class Game : public Window
 private:
     vector<vector<Mezo *>> _palya;
     int _size;
+
+
     bool _jatekos;
 public:
     Game (int x, int y) : Window (x,y)
@@ -70,17 +72,11 @@ public:
                     {
                         i++;
                     }
-                    
+
                     if (i == 5)
                         winner = 1;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[x][y]->is_O())
                 {
                     int i = 1;
@@ -91,13 +87,7 @@ public:
                     if (i == 5)
                         winner = 2;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[y][x]->is_X())
                 {
                     int i = 1;
@@ -108,13 +98,7 @@ public:
                     if (i == 5)
                         winner = 1;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[y][x]->is_O())
                 {
                     int i = 1;
@@ -125,13 +109,7 @@ public:
                     if (i == 5)
                         winner = 2;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[y][x]->is_X())
                 {
                     int i = 1;
@@ -142,13 +120,7 @@ public:
                     if (i == 5)
                         winner = 1;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[y][x]->is_O())
                 {
                     int i = 1;
@@ -159,13 +131,7 @@ public:
                     if (i == 5)
                         winner = 2;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[y][x]->is_X())
                 {
                     int i = 1;
@@ -176,13 +142,7 @@ public:
                     if (i == 5)
                         winner = 1;
                 }
-            }
-        }
 
-        for (int y = 1; y < _size-1; y++)
-        {
-            for (int x = 1; x < _size-1; x++)
-            {
                 if (_palya[y][x]->is_O())
                 {
                     int i = 1;
