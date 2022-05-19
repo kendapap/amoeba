@@ -7,6 +7,7 @@
 #include "numset.hpp"
 #include "menu.hpp"
 #include "button.hpp"
+#include "mezo.hpp"
 #include  <vector>
 #include <string>
 #include <fstream>
@@ -22,9 +23,11 @@ protected:
 public:
     Window (int X, int Y);
     void add_widget (Widget *widget_to_add);
-    void event_loop ();
-    virtual void logging () = 0;
-    virtual void button_press (Button *melyik) = 0;
+    virtual void event_loop ();
+    virtual void logging ();
+    virtual void clean ();
+    virtual void button_press (Button *melyik);
+    virtual void mezo_press (Mezo *melyik);
 };
 
 #endif

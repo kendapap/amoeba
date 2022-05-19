@@ -17,13 +17,7 @@ void Window::add_widget(Widget *widget_to_add)
 }
 
 void Window::event_loop()
-{
-    for (auto w : _widgets)
-    {
-        w->draw();
-    }
-    gout << refresh;
-    
+{   
     while (gin >> _ev && _ev.keycode != key_escape)
     {
         if (_ev.button == btn_left)
@@ -50,4 +44,17 @@ void Window::event_loop()
         
         gout << refresh;
     }
+}
+
+void Window::logging()
+{}
+
+void Window::button_press (Button *melyik){}
+void Window::mezo_press (Mezo *melyik){}
+
+void Window::clean()
+{
+    gout << move_to (0,0)
+             << color (0,0,0)
+             << box (_X,_Y);
 }
