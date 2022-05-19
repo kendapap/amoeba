@@ -1,4 +1,3 @@
-#include "graphics.hpp"
 #include "window.hpp"
 #include <iostream>
 
@@ -56,6 +55,150 @@ public:
         gout << refresh;
     }
 
+    int win_check ()
+    {
+        int winner = 0;
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[x][y]->is_X())
+                {
+                    int i = 1;
+                    while (_palya[x][y+i]->is_X())
+                    {
+                        i++;
+                    }
+                    
+                    if (i == 5)
+                        winner = 1;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[x][y]->is_O())
+                {
+                    int i = 1;
+                    while (_palya[x][y+i]->is_O())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 2;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[y][x]->is_X())
+                {
+                    int i = 1;
+                    while (_palya[y+i][x]->is_X())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 1;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[y][x]->is_O())
+                {
+                    int i = 1;
+                    while (_palya[y+i][x]->is_O())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 2;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[y][x]->is_X())
+                {
+                    int i = 1;
+                    while (_palya[y+i][x+i]->is_X())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 1;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[y][x]->is_O())
+                {
+                    int i = 1;
+                    while (_palya[y+i][x+i]->is_O())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 2;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[y][x]->is_X())
+                {
+                    int i = 1;
+                    while (_palya[y+i][x-i]->is_X())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 1;
+                }
+            }
+        }
+
+        for (int y = 1; y < _size-1; y++)
+        {
+            for (int x = 1; x < _size-1; x++)
+            {
+                if (_palya[y][x]->is_O())
+                {
+                    int i = 1;
+                    while (_palya[y+i][x-i]->is_O())
+                    {
+                        i++;
+                    }
+                    if (i == 5)
+                        winner = 2;
+                }
+            }
+        }
+
+        return winner;
+    }
+
     void mezo_press (Mezo *melyik) 
     {
         melyik->click(_jatekos);
@@ -91,6 +234,12 @@ public:
         }
 
         friss();
+
+        if (win_check() == 1)
+            cout << "X nyert\n";
+
+        if (win_check() == 2)
+            cout << "O nyert\n";
     }
 };
 

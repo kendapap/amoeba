@@ -108,3 +108,13 @@ void Mezo::make_usable(bool u)
         _usable = 0;
     }
 }
+
+bool Mezo::is_X()
+{
+    return _state == 1;
+}
+
+bool Mezo::is_O()
+{
+     return _state == 2;
+}

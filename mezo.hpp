@@ -17,6 +17,8 @@ public:
     virtual void use (genv::event ev) override;
     void click (bool jatekos);
     bool is_free ();
+    bool is_X ();
+    bool is_O ();
     void make_usable (bool u);
 };
 
