@@ -34,7 +34,6 @@ void Window::event_loop()
         if (selected)
         {
             selected->use(_ev);
-            selected->draw();
         }
 
         if (_ev.keycode == -key_space)

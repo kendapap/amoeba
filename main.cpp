@@ -8,14 +8,20 @@ class Game : public Window
 {
 private:
     vector<vector<Mezo *>> _palya;
+    Static_text *_winner;
+    Static_text *_title;
+    Static_text *_next_player;
+    Button *_start;
+    Button *_close;
     int _size;
-
 
     bool _jatekos;
 public:
     Game (int x, int y) : Window (x,y)
     {
         _jatekos = 0;
+        _next_player = new Static_text (20,20,200,30,"Kék következik");
+
         _size = 17;
 
         for(int y = 0; y < _size; y++)
@@ -41,6 +47,9 @@ public:
                 _palya[x][y]->draw();
             }
         }
+        _next_player->draw();
+
+
     }
 
     void friss ()
@@ -54,7 +63,7 @@ public:
                 _palya[x][y]->draw();
             }
         }
-        gout << refresh;
+        _next_player->draw();
     }
 
     int win_check ()
@@ -159,10 +168,71 @@ public:
         return winner;
     }
 
+    void main_menu (int type)
+    {
+        clean();
+        if (type == 1 || type == 2)
+        {
+            if (type == 1)
+                _winner = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Piros nyert");
+            else
+                _winner = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Kék nyert");
+            _winner->draw();
+            _start = new Button (_X/2-150, _Y/2+25, 300,50,"Restart",this);
+            _widgets.push_back(_start);
+            _start->draw();
+        }
+        if (type == 0)
+        {
+            _title = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Amőba");
+            _start = new Button (_X/2-150, _Y/2+25, 300,50,"Start",this);
+            _widgets.push_back(_start);
+            _title->draw();
+            _start->draw();
+        }
+    }
+
+    void button_press (Button *melyik)
+    {
+        if (melyik == _start)
+        {
+            for (size_t i = 0; i < _widgets.size();i++)
+            {
+                if (_widgets[i] == _start)
+                    _widgets.erase(_widgets.begin()+i);
+            }
+            clean();
+            
+            for (int y = 0; y < _size; y++)
+            {
+                for (int x = 0; x < _size; x++)
+                {
+                    _palya[x][y]->reset();
+                    
+                    if (x == 0 || y == 0 ||
+                    x == _size-1 || y ==_size-1)
+                    {
+                        _palya[x][y]->make_usable(0);
+                    }
+
+                    _palya[x][y]->draw();
+                }
+            }
+
+            _jatekos = 0;
+            _next_player->change("Kék következik");
+            _next_player->draw();
+        }
+    }
+
     void mezo_press (Mezo *melyik) 
     {
         melyik->click(_jatekos);
         _jatekos = !_jatekos;
+        if (_jatekos)
+            _next_player->change("Piros következik");
+        else
+            _next_player->change("Kék következik");
 
         for (int y = 0; y < _size; y++)
         {
@@ -196,16 +266,21 @@ public:
         friss();
 
         if (win_check() == 1)
-            cout << "X nyert\n";
+        {
+            main_menu(1);
+        }
 
         if (win_check() == 2)
-            cout << "O nyert\n";
+        {
+            main_menu(2);
+        }
     }
 };
 
 int main ()
 {
     Game g (958,958);
+    g.main_menu(0);
     g.event_loop();
     return 0;
 }

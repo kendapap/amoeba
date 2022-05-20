@@ -20,6 +20,7 @@ public:
     bool is_X ();
     bool is_O ();
     void make_usable (bool u);
+    void reset ();
 };
 
 #endif

@@ -118,3 +118,10 @@ bool Mezo::is_O()
 {
      return _state == 2;
 }
+
+void Mezo::reset()
+{
+    _free = 1;
+    _state = 0;
+    _usable = 1;
+}
