@@ -49,7 +49,6 @@ public:
         }
         _next_player->draw();
 
-
     }
 
     void friss ()
@@ -170,9 +169,10 @@ public:
 
     void main_menu (int type)
     {
-        clean();
+        
         if (type == 1 || type == 2)
         {
+            clean();
             if (type == 1)
                 _winner = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Piros nyert");
             else
@@ -184,11 +184,8 @@ public:
         }
         if (type == 0)
         {
-            _title = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Amőba");
-            _start = new Button (_X/2-150, _Y/2+25, 300,50,"Start",this);
-            _widgets.push_back(_start);
+            _title = new Static_text (_X/2-250,_Y-40, 500, 30, "A kezdéshez kattints bárhova!");
             _title->draw();
-            _start->draw();
         }
     }
 
@@ -199,7 +196,9 @@ public:
             for (size_t i = 0; i < _widgets.size();i++)
             {
                 if (_widgets[i] == _start)
+                {   
                     _widgets.erase(_widgets.begin()+i);
+                }
             }
             clean();
             
