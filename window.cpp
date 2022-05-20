@@ -9,6 +9,7 @@ Window::Window (int X, int Y) : _X(X), _Y(Y)
 {
     gout.open (_X,_Y);
     selected = 0;
+    _running = true;
 }
 
 void Window::add_widget(Widget *widget_to_add)
@@ -18,7 +19,7 @@ void Window::add_widget(Widget *widget_to_add)
 
 void Window::event_loop()
 {   
-    while (gin >> _ev && _ev.keycode != key_escape)
+    while (gin >> _ev && _ev.keycode != key_escape && _running)
     {
         if (_ev.button == btn_left)
         {

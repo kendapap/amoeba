@@ -19,7 +19,7 @@ protected:
     std::vector<Widget *> _widgets;
     Widget *selected;
     genv::event _ev;
-
+    bool _running;
 public:
     Window (int X, int Y);
     void add_widget (Widget *widget_to_add);

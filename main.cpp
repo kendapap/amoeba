@@ -68,6 +68,7 @@ public:
     int win_check ()
     {
         int winner = 0;
+        int d = 0;
 
         for (int y = 1; y < _size-1; y++)
         {
@@ -161,8 +162,16 @@ public:
                     if (i == 5)
                         winner = 2;
                 }
-            }
+                
+                if (!_palya[y][x]->is_free())
+                {
+                    d++;
+                }
+            }  
         }
+
+        if (d == (_size-2)*(_size-2))
+            winner = 3;
 
         return winner;
     }
@@ -170,17 +179,21 @@ public:
     void main_menu (int type)
     {
         
-        if (type == 1 || type == 2)
+        if (type == 1 || type == 2 || type == 3)
         {
             clean();
             if (type == 1)
                 _winner = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Piros nyert");
-            else
+            if (type == 2)
                 _winner = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Kék nyert");
+            if (type == 3)
+                _winner = new Static_text (_X/2-150,_Y/2-75, 300, 50, "Döntetlen");
+           
             _winner->draw();
             _start = new Button (_X/2-150, _Y/2+25, 300,50,"Restart",this);
             _widgets.push_back(_start);
             _start->draw();
+
         }
         if (type == 0)
         {
@@ -200,6 +213,7 @@ public:
                     _widgets.erase(_widgets.begin()+i);
                 }
             }
+
             clean();
             
             for (int y = 0; y < _size; y++)
@@ -272,6 +286,11 @@ public:
         if (win_check() == 2)
         {
             main_menu(2);
+        }
+
+        if (win_check() == 3)
+        {
+            main_menu(3);
         }
     }
 };
